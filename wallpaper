@@ -1,0 +1,5 @@
+#!/bin/bash
+WALLPAPER_IMAGE=$(nsxiv -o ~/Pictures/wallpaper)
+echo "image: ${WALLPAPER_IMAGE}"
+wal --backend wal --saturate 0.55 -i $WALLPAPER_IMAGE
+dwmc quit 1

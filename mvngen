@@ -1,0 +1,20 @@
+#!/bin/bash
+
+DgroupId="$1"
+
+case $# in
+	1)
+		echo "1 input"
+		DartifactId=$(echo "$1" | sed 's/\(.*\)[.]\(.*\)/\2/g')
+		;;
+	2)
+		echo "2 inputs"
+		DartifactId="$2"
+		;;
+	*)
+		echo "error, too many inputs"
+		exit 0
+		;;
+esac
+
+mvn archetype:generate -DgroupId=$DgroupId -DartifactId=$DartifactId -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false
