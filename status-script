@@ -1,0 +1,27 @@
+#!/bin/bash
+
+function getbattery {
+	if [ "$(ls /sys/class/power_supply/ | grep BAT)" = "" ]; then
+		echo NULL
+	else
+		max=0
+		now=0
+
+		for i in $(ls /sys/class/power_supply/ | grep BAT); do
+			max=$(($max + $(cat /sys/class/power_supply/$i/energy_full)))
+			now=$(($now + $(cat /sys/class/power_supply/$i/energy_now)))
+		done
+
+		echo "$((($now*100)/$max))"
+	fi
+}
+
+while true; do
+	text=""
+	text+=$(date +"%I:%M")
+	if [ "$(getbattery)" != "NULL" ]; then
+		text+="|$(getbattery)"
+	fi
+	xsetroot -name "$text"
+	sleep 5
+done
