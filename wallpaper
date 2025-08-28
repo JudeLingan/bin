@@ -1,5 +1,4 @@
 #!/bin/bash
-WALLPAPER_IMAGE=$(nsxiv -o ~/Pictures/wallpaper)
-echo "image: ${WALLPAPER_IMAGE}"
-wal --backend haishoku --saturate 0.55 -i $WALLPAPER_IMAGE
+WALLPAPER_IMAGE=$(nsxiv -o -t ~/Pictures/wallpaper)
+wal --backend haishoku -i $WALLPAPER_IMAGE
 dwmc quit 1
