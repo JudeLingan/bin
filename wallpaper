@@ -1,4 +1,4 @@
 #!/bin/bash
 WALLPAPER_IMAGE=$(nsxiv -o -t ~/Pictures/wallpaper)
-wal --backend wal --contrast 1.5 -i "${WALLPAPER_IMAGE}"
+wal --backend haishoku --contrast 2.0 -i "${WALLPAPER_IMAGE}"
 dwmc quit 1
