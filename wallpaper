@@ -1,4 +1,4 @@
 #!/bin/bash
 WALLPAPER_IMAGE=$(nsxiv -o -t ~/Pictures/wallpaper)
-wal --backend colorz --cols16 lighten -i "${WALLPAPER_IMAGE}"
+wal --cols16 lighten -i "${WALLPAPER_IMAGE}"
 dwmc quit 1
