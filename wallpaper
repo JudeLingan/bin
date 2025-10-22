@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 WALLPAPER_IMAGE=$(nsxiv -o -t ~/Pictures/wallpaper)
-wal --cols16 --backend colorz -b 000000 -i "${WALLPAPER_IMAGE}"
+wal --cols16 --backend colorz -i "${WALLPAPER_IMAGE}"
 dwmc quit 1
