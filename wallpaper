@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-backend=wal
+backend=colorz
 contrast=1.0
 cols16=darken
 
