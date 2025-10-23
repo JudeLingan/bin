@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-backend=colorz
+backend=wal
 contrast=1.0
 cols16=darken
 
@@ -11,7 +11,7 @@ change_something() {
 		printf "What should be changed?\n\
 		0: backend\n\
 		1: contrast\n\
-		2: cols16\n"
+		2: saturate\n"
 
 		read response
 		case "$response" in
@@ -21,25 +21,30 @@ change_something() {
 				else
 					backend=wal
 				fi
-				break ;;
+				;;
 			1)
 				echo -n "What should the new contrast be? "
 				read newcontrast
 				contrast="$newcontrast"
-				break ;;
+				;;
 			2)
-				if [ "$cols16" = "darken" ]; then
-					cols16=lighten
-				else
-					cols16=darken
-				fi
+				echo -n "What should the new satutation be? "
+				read newsatutation
+				saturation="$newsatutation"
+				;;
+			*)
 				break ;;
+
 		esac
 	done
 }
 
 while true; do
-	wal --cols16 $cols16 --backend $backend --contrast $contrast -i "${WALLPAPER_IMAGE}"
+	walargs="--cols16 $cols16 --backend $backend --contrast $contrast -i ${WALLPAPER_IMAGE}"
+	if [[ -v saturation ]]; then
+		walargs="--saturate ${saturation} ${walargs}"
+	fi
+	wal $walargs
 	fastfetch
 	echo "Is this satisfatory? [y/N] "
 	read response
