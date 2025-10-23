@@ -1,4 +1,53 @@
 #!/usr/bin/env bash
+
+backend=wal
+contrast=1.0
+cols16=darken
+
 WALLPAPER_IMAGE=$(nsxiv -o -t ~/Pictures/wallpaper)
-wal --cols16 --backend colorz -i "${WALLPAPER_IMAGE}"
+
+change_something() {
+	while true; do
+		printf "What should be changed?\n\
+		0: backend\n\
+		1: contrast\n\
+		2: cols16\n"
+
+		read response
+		case "$response" in
+			0)
+				if [ "$backend" = "wal" ]; then
+					backend=colorz
+				else
+					backend=wal
+				fi
+				break ;;
+			1)
+				echo -n "What should the new contrast be? "
+				read newcontrast
+				contrast="$newcontrast"
+				break ;;
+			2)
+				if [ "$cols16" = "darken" ]; then
+					cols16=lighten
+				else
+					cols16=darken
+				fi
+				break ;;
+		esac
+	done
+}
+
+while true; do
+	wal --cols16 $cols16 --backend $backend --contrast $contrast -i "${WALLPAPER_IMAGE}"
+	fastfetch
+	echo "Is this satisfatory? [y/N] "
+	read response
+	if [[ "$response" =~ ^([yY])$ ]]; then
+		break
+	else
+		change_something
+	fi
+done
+
 dwmc quit 1
