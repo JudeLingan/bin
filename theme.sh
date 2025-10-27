@@ -18,7 +18,7 @@ for i in "${programs[@]}"; do
 	ln -f $THEME_DIR/$THEME/colors-$i.* $HOME/.config/$i/
 done
 
-ln -f $THEME_DIR/$THEME/colors-nvim.lua $HOME/.config/nvim/lua/config
+ln -f $THEME_DIR/$THEME/colors-nvim.lua $HOME/.config/nvim/lua/plugins
 
 pkill waybar
 riverctl spawn waybar
