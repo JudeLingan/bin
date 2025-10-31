@@ -29,4 +29,5 @@ riverctl background-color $color_accent
 riverctl border-color-focused $color_fg
 riverctl border-color-unfocused $color_subtle
 
-nwg-look -a
+gsettings set org.gnome.desktop.interface gtk-theme default
+gsettings set org.gnome.desktop.interface gtk-theme colors-gtk
