@@ -19,6 +19,7 @@ for i in "${programs[@]}"; do
 done
 
 ln -f $THEME_DIR/$THEME/colors-nvim.lua $HOME/.config/nvim/lua/plugins
+ln -sf $THEME_DIR/$THEME/colors-gtk $HOME/.themes
 
 pkill waybar
 riverctl spawn waybar
@@ -27,3 +28,5 @@ source $HOME/.config/river/colors-river.sh
 riverctl background-color $color_accent
 riverctl border-color-focused $color_fg
 riverctl border-color-unfocused $color_subtle
+
+nwg-look -a
