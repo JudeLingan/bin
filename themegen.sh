@@ -21,5 +21,5 @@ color_subtle=\"0x$3\"\n
 color_accent=\"0x$4\"\n
 color_error=\"0x$5\""
 
-echo waybarcolors > ./colors-waybar.css
-echo rivercolors > ./colors-river.sh
+echo waybarcolors > colors-waybar.css
+echo rivercolors > colors-river.sh
