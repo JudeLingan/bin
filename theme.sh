@@ -8,12 +8,15 @@ if [ -z $THEME ]; then
 	exit 0
 fi
 
+source $THEME_DIR/$THEME/settings.sh
+
 programs=(
 	"rofi"
 	"alacritty"
 	"waybar"
 	"river"
 )
+
 for i in "${programs[@]}"; do
 	ln -f $THEME_DIR/$THEME/colors-$i.* $HOME/.config/$i/
 done
@@ -31,3 +34,4 @@ riverctl border-color-unfocused $color_subtle
 
 gsettings set org.gnome.desktop.interface gtk-theme default
 gsettings set org.gnome.desktop.interface gtk-theme colors-gtk
+gsettings set org.gnome.desktop.interface color-scheme "$theme_is_dark"
