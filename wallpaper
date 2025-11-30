@@ -1,58 +1,7 @@
 #!/usr/bin/env bash
-
-backend=colorz
-contrast=1.0
-cols16=darken
-
 WALLPAPER_IMAGE=$(nsxiv -o -t ~/Pictures/wallpaper)
 
-change_something() {
-	while true; do
-		printf "What should be changed?\n\
-		0: backend\n\
-		1: contrast\n\
-		2: saturate\n"
+pkill swaybg
+swaybg -i $WALLPAPER_IMAGE -m fill > /dev/null 2>&1 & disown
 
-		read response
-		case "$response" in
-			0)
-				if [ "$backend" = "wal" ]; then
-					backend=colorz
-				else
-					backend=wal
-				fi
-				;;
-			1)
-				echo -n "What should the new contrast be? "
-				read newcontrast
-				contrast="$newcontrast"
-				;;
-			2)
-				echo -n "What should the new satutation be? "
-				read newsatutation
-				saturation="$newsatutation"
-				;;
-			*)
-				break ;;
-
-		esac
-	done
-}
-
-while true; do
-	walargs="--cols16 $cols16 --backend $backend --contrast $contrast -i ${WALLPAPER_IMAGE}"
-	if [[ -v saturation ]]; then
-		walargs="--saturate ${saturation} ${walargs}"
-	fi
-	wal $walargs
-	fastfetch
-	echo "Is this satisfatory? [y/N] "
-	read response
-	if [[ "$response" =~ ^([yY])$ ]]; then
-		break
-	else
-		change_something
-	fi
-done
-
-dwmc quit 1
+cp -f $WALLPAPER_IMAGE ~/.config/themes/colors-wallpaper.
