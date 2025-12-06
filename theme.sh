@@ -3,6 +3,10 @@
 THEME_DIR=$HOME/.config/themes
 THEME=$(ls $THEME_DIR | rofi -dmenu)
 
+if ! [[-v $THEME]]; then
+	exit 1
+fi
+
 if [ ! -d $THEME_DIR/$THEME/colors-wallpaper ]; then
 	mkdir $THEME_DIR/$THEME/colors-wallpaper
 fi
