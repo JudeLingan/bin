@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-WALLPAPER_IMAGE=$(nsxiv -o -t ~/Pictures/wallpaper)
+WALLPAPER_IMAGE=$(swayimg -C ~/.config/swayimg/wallpaperrc ~/Pictures/wallpaper)
 
-pkill swaybg
-swaybg -i $WALLPAPER_IMAGE -m fill > /dev/null 2>&1 & disown
+rm ~/.config/colors-wallpaper/*
+cp -t ~/.config/colors-wallpaper/ $WALLPAPER_IMAGE 
 
-cp -f $WALLPAPER_IMAGE ~/.config/themes/colors-wallpaper.
+killall swaybg
+swaybg -i ~/.config/colors-wallpaper/* -m fill & disown
