@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-WALLPAPER_IMAGE=$(swayimg -C ~/.config/swayimg/wallpaperrc ~/Pictures/wallpaper)
+WALLPAPER_IMAGE=$(swayimg -c ~/.config/swayimg/wallpaperrc ~/Pictures/wallpaper)
 
 if ! [ -f "$WALLPAPER_IMAGE" ]; then
 	exit 1
