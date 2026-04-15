@@ -21,6 +21,7 @@ programs=(
 	"waybar"
 	"river"
 	"foot"
+	"hypr"
 )
 
 for i in "${programs[@]}"; do
