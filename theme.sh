@@ -47,3 +47,5 @@ gsettings set org.gnome.desktop.interface color-scheme "$theme_is_dark"
 
 killall swaybg
 swaybg -i ~/.config/colors-wallpaper/* -m fill & disown
+
+hyprctl keyword source ~/.config/hypr/recolor.conf
