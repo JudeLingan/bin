@@ -34,18 +34,18 @@ ln -sf $THEME_DIR/$THEME/colors-gtk $HOME/.themes
 ln -sf $THEME_DIR/$THEME/colors-wallpaper $HOME/.config
 
 #config
-killall -SIGUSR2 waybar
+killall -SIGUSR2 waybar &
 
-source $HOME/.config/river/colors-river.sh
-riverctl background-color $color_accent
-riverctl border-color-focused $color_fg
-riverctl border-color-unfocused $color_subtle
+source $HOME/.config/river/colors-river.sh &
+riverctl background-color $color_accent &
+riverctl border-color-focused $color_fg &
+riverctl border-color-unfocused $color_subtle &
+
+hyprctl keyword source ~/.config/hypr/recolor.conf &
+
+killall swaybg
+swaybg -i ~/.config/colors-wallpaper/* -m fill & disown &
 
 gsettings set org.gnome.desktop.interface gtk-theme default
 gsettings set org.gnome.desktop.interface gtk-theme colors-gtk
 gsettings set org.gnome.desktop.interface color-scheme "$theme_is_dark"
-
-killall swaybg
-swaybg -i ~/.config/colors-wallpaper/* -m fill & disown
-
-hyprctl keyword source ~/.config/hypr/recolor.conf
