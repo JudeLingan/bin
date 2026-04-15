@@ -20,6 +20,7 @@ programs=(
 	"alacritty"
 	"waybar"
 	"river"
+	"foot"
 )
 
 for i in "${programs[@]}"; do
