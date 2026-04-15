@@ -15,36 +15,34 @@ fi
 
 source $THEME_DIR/$THEME/settings.sh
 
-programs=(
-	"rofi"
-	"alacritty"
-	"waybar"
-	"river"
-	"foot"
-	"hypr"
+declare -A overrides=(
+	[nvim]="$HOME/.config/nvim/lua/plugins"
+	[gtk]="$HOME/.themes"
+	[wallpaper]="$HOME/.config"
 )
 
-for i in "${programs[@]}"; do
-	ln -f $THEME_DIR/$THEME/colors-$i.* $HOME/.config/$i/
-done
+for i in $(ls $THEME_DIR/$THEME); do
+	if [ $(echo $i | awk -F'-' '{print $1}') != "colors" ]; then
+		continue
+	fi
 
-#programs not directly in config folder
-ln -f $THEME_DIR/$THEME/colors-nvim.lua $HOME/.config/nvim/lua/plugins
-ln -sf $THEME_DIR/$THEME/colors-gtk $HOME/.themes
-ln -sf $THEME_DIR/$THEME/colors-wallpaper $HOME/.config
+	program=$(echo $i | awk -F'.' '{print substr($1, 8)}')
+	echo "$program"
+	dir="$HOME/.config/$program"
+	if [[ -v overrides[$program] ]]; then
+		dir="${overrides[$program]}"
+	fi
+	echo "$THEME_DIR/$THEME/$i"
+	ln -sfn "$THEME_DIR/$THEME/$i" "$dir/$i"
+done
 
 #config
 killall -SIGUSR2 waybar &
 
-source $HOME/.config/river/colors-river.sh &
-riverctl background-color $color_accent &
-riverctl border-color-focused $color_fg &
-riverctl border-color-unfocused $color_subtle &
-
 hyprctl keyword source ~/.config/hypr/recolor.conf &
 
 killall swaybg
-swaybg -i ~/.config/colors-wallpaper/* -m fill & disown &
+swaybg -i ~/.config/colors-wallpaper/* -m fill &
 
 gsettings set org.gnome.desktop.interface gtk-theme default
 gsettings set org.gnome.desktop.interface gtk-theme colors-gtk
