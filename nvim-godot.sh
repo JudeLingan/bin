@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
 
 # first arg is project folder
-# the rest is commands to be passed to the server
+# second arg is file
+# third arg is line
 
 # process args
 termrun="alacritty -e "
 project="$1"
 sock_pre="/tmp/nvim-socks"
 sock="$sock_pre/$(basename "$project")"
-args="${@:2}"
+file="$2"
+line="$3"
 
 # open and own folder if it doesn not exist
 [ -d "$sock_pre" ] || mkdir -p "$sock_pre"
@@ -17,7 +19,8 @@ args="${@:2}"
 
 # listen on new socket if none exists
 if [ -S "$sock" ]; then
-	nvim --server "$sock" --remote "${args[@]}"
+	nvim --server "$sock" --remote-tab "$file"
+	nvim --server "$sock" --remote-send '<C-\><C-N>:'"$line"'<CR>'
 else
-	$termrun nvim --listen "$sock" "${args[@]}"
+	$termrun nvim --listen "$sock" "$file" +"$line"
 fi
